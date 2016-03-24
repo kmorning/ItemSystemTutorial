@@ -37,29 +37,10 @@ namespace AlteredIncarnation.ItemSystem.Editor
         void OnEnable()
         {
             qualityDB = ISQualityDatabase.LoadDatabase(DB_FOLDER_NAME, DB_FILE);
-
-            /*
-            qualityDB = AssetDatabase.LoadAssetAtPath(DB_PATH, typeof(ISQualityDatabase)) as ISQualityDatabase;
-
-            if (qualityDB == null)
-            {
-                if (!AssetDatabase.IsValidFolder("Assets/" + DB_FOLDER_NAME))
-                {
-                    AssetDatabase.CreateFolder("Assets", DB_FOLDER_NAME);
-                }
-                qualityDB = ScriptableObject.CreateInstance<ISQualityDatabase>();
-                AssetDatabase.CreateAsset(qualityDB, DB_PATH);
-                AssetDatabase.SaveAssets();
-                //AssetDatabase.Refresh();
-            }
-            selectedItem = new ISQuality();
-             */
         }
 
         void OnGUI()
         {
-            //GUILayout.Label("This is a label");
-            //AddQualityToDataBase();
             ListView();
 
             GUILayout.BeginHorizontal("Box", GUILayout.ExpandWidth(true));
@@ -107,7 +88,6 @@ namespace AlteredIncarnation.ItemSystem.Editor
             {
                 if (selectedItem == null || string.IsNullOrEmpty(selectedItem.Name)) return;
 
-                //qualityDB.Add(selectedItem);
                 qualityDB.Items.Add(selectedItem);
                 EditorUtility.SetDirty(qualityDB);
                 selectedItem = new ISQuality();
