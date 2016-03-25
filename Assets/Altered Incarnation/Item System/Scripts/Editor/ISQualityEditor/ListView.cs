@@ -22,6 +22,7 @@ namespace AlteredIncarnation.ItemSystem.Editor
         void DisplayQualities()
         {
             int removeIndex = -1;
+            List<string> nameEdits = new List<string>();
 
             foreach (ISQuality item in qualityDB.Items)
             {
@@ -40,7 +41,9 @@ namespace AlteredIncarnation.ItemSystem.Editor
                 }
 
                 // Item Name
-                item.Name = GUILayout.TextField(item.Name);
+                string itemName;
+                itemName = GUILayout.TextField(item.Name);
+                nameEdits.Add(itemName);
 
                 // Delete Button
                 if (GUILayout.Button("x", GUILayout.Width(30)))
@@ -50,15 +53,21 @@ namespace AlteredIncarnation.ItemSystem.Editor
                         " from the database?", "Delete", "Cancel"))
                     {
                         removeIndex = qualityDB.Items.IndexOf(item);
+                        EditorUtility.SetDirty(qualityDB);
                     }
                 }
                 GUILayout.EndHorizontal();
             }
 
-            // Remove pending deletion from list
-            if (removeIndex >= 0)
+            
+            // Handle item name change
+            foreach (ISQuality item in qualityDB.Items)
             {
-                qualityDB.Items.RemoveAt(removeIndex);
+                if (item.Name != nameEdits[qualityDB.Items.IndexOf(item)])
+                {
+                    item.Name = nameEdits[qualityDB.Items.IndexOf(item)];
+                    EditorUtility.SetDirty(qualityDB);
+                }
             }
 
             // Handle icon change
@@ -67,6 +76,13 @@ namespace AlteredIncarnation.ItemSystem.Editor
             {
                 selectedItem.Icon = (Sprite)EditorGUIUtility.GetObjectPickerObject();
                 Repaint();
+                EditorUtility.SetDirty(qualityDB);
+            }
+
+            // Remove pending deletion from list
+            if (removeIndex >= 0)
+            {
+                qualityDB.Items.RemoveAt(removeIndex);
             }
         }
     }

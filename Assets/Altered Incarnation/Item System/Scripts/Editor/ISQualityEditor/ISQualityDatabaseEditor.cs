@@ -55,6 +55,7 @@ namespace AlteredIncarnation.ItemSystem.Editor
             if (GUILayout.Button("Add"))
             {
                 qualityDB.Items.Add(new ISQuality());
+                EditorUtility.SetDirty(qualityDB);
             }
         }
 
