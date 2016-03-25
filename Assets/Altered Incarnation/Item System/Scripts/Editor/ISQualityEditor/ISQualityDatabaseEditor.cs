@@ -41,6 +41,13 @@ namespace AlteredIncarnation.ItemSystem.Editor
 
         void OnGUI()
         {
+            // Just in case OnGUI fires before OnEnable
+            if (qualityDB == null)
+            {
+                Debug.LogWarning("qualityDB not loaded");
+                return;
+            }
+
             ListView();
 
             GUILayout.BeginHorizontal("Box", GUILayout.ExpandWidth(true));
