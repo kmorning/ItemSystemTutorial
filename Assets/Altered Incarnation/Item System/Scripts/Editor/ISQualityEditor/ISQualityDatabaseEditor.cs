@@ -21,7 +21,7 @@ namespace AlteredIncarnation.ItemSystem.Editor
 
         const int SPRITE_BUTTON_SIZE = 46;
 
-        [MenuItem("AltInc/Database/Quality Editor %#i")]
+        [MenuItem("AltInc/Database/Quality Editor %#w")]
         public static void Init()
         {
             ISQualityDatabaseEditor window = EditorWindow.GetWindow<ISQualityDatabaseEditor>();
