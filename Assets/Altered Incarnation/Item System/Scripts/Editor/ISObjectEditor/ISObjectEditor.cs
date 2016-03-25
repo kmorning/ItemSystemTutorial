@@ -22,8 +22,9 @@ namespace AlteredIncarnation.ItemSystem.Editor
         {
         }
 
-        void OnGUI
+        void OnGUI()
         {
+            TopTabBar();
         }
     }
 }
